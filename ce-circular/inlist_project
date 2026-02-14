@@ -1,0 +1,97 @@
+&star_job
+! ------------------------------------------ Set ups models ------------------------------
+      load_saved_model                    = .true.
+      load_model_filename = '/home/malenia_astro/Research/CommonEnvelope/mesa-inspiral/ce-circular/12.0MsunInput.mod'
+      save_model_when_terminate           = .true.
+      save_model_filename = '/home/malenia_astro/Research/CommonEnvelope/mesa-inspiral/ce-circular/12.0MsunOutput.mod'
+      write_profile_when_terminate        = .true.
+      filename_for_profile_when_terminate = '/home/malenia_astro/Research/CommonEnvelope/mesa-inspiral/ce-circular/12.0MsunProfile.data'
+
+! ------------------------------------ Directories: Temp caches --------------------------
+      eosDT_cache_dir           = './eosDT_cache'
+      kap_cache_dir             = './kap_cache'
+      rates_cache_dir           = './rates_cache'
+      history_columns_file      = 'history_columns.list'
+      profile_columns_file      = 'profile_columns.list'
+      show_net_species_info     = .true. ! Shows all species on mod file
+      save_photo_when_terminate = .false.! Stops saving photos
+
+! -------------------------------- V-flag: velocity at cell boundaries -------------------------
+      change_v_flag               = .true.
+      change_initial_v_flag       = .true.
+      new_v_flag                  = .true.
+
+      set_initial_cumulative_energy_error = .true.
+      new_cumulative_energy_error = 0d0
+
+/ !end of star_job namelist
+
+&eos
+/ ! end of eos namelist
+
+&kap
+      use_Type2_opacities = .true.
+      Zbase               = 0.01
+      kap_CO_prefix       = 'gs98_co'
+/ ! end of kap namelist
+
+&controls
+! ------------------------------------ Time step controls ---------------------------
+      varcontrol_target = 1d-4
+      max_age = 16738681.165543368
+      !default_net_name = "cno_extras_plus_fe56.net"      ! Use extended network for hot star
+
+! -------------------------------------- Hooks  ------------------------------
+      ! Removes outer layers of mass based on escape velocity...
+      ! Includes graviational potential of accretor....
+      use_other_wind     = .false.
+      use_other_momentum = .false.
+      ! Mass of Accretor [g], Radi of Accretor [cm]
+      x_ctrl(1) = 100
+      x_ctrl(2) = 500
+! ------------------------------------- mixing controls ----------------------
+      MLT_option                                   = 'ML1'
+      mixing_length_alpha                          = 1.5
+      T_mix_limit                                  = 0
+      okay_to_reduce_gradT_excess                  = .true. ! Boost energy efficency
+
+      velocity_logT_lower_bound                    = 4.0      ! Locally overides velocity flag
+      max_conv_vel_div_csound                      = 1.0    ! con_vel are limited to local cs times this factor
+      max_v_div_cs_for_convection                  = 1d1    ! conv disabled, for abs(v)/cs > this limit = 1d99
+
+! ------------------------------------ Trigger hydrodynamics -------------------------
+    use_dPrad_dm_form_of_T_gradient_eqn              = .true.
+    energy_eqn_option                                = 'dedt'
+    use_momentum_outer_BC                            = .true.  ! Sets T to blackbody
+    use_compression_outer_BC                         = .false.
+
+! ------------------------------------ For Solvers ---------------------------------------------------
+      !scale_max_correction              = 0.1
+      !corr_coeff_limit                  = 1d-3
+      !ignore_too_large_correction                    = .true.
+      !ignore_min_corr_coeff_for_scale_max_correction = .true.
+      !ignore_species_in_max_correction               = .true.
+      !solver_itermin_until_reduce_min_corr_coeff = 30
+! ------------------------------------ Limit Models produce ------------------------------------------
+      max_model_number  = -1
+      max_number_retries = 5000
+! ----------------------------------------- Mesh controls --------------------------------------------
+      max_dq                        = 1d-3    ! Fraction of total mass
+      mesh_delta_coeff              = 0.8
+      restore_mesh_on_retry         = .true.
+      okay_to_remesh                = .true.
+      use_split_merge_amr            = .true.
+      split_merge_amr_log_zoning = .true.
+      relax_use_gold_tolerances = .true.
+
+! ---------------------------------------- Output intervals -----------------------------------------
+      photo_interval             = 1000
+      profile_interval           = 100
+      history_interval           = 1
+      terminal_interval          = 10
+      write_header_frequency     = 10
+      max_num_profile_models     = 1000
+      write_profiles_flag        = .false.
+      extra_terminal_output_file = '/home/malenia_astro/Research/CommonEnvelope/mesa-inspiral/ce-circular/MesaTerminalOutPut'
+      star_history_name = '12.0MsunProfile.data.history'
+/ ! end of controls namelist
