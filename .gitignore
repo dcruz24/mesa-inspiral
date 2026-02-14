@@ -1,0 +1,53 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter notebooks
+.ipynb_checkpoints/
+**/.ipynb_checkpoints/
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# IDE/editor folders
+.vscode/
+.idea/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# Test / coverage
+.pytest_cache/
+.cache/
+coverage.xml
+.coverage
+
+# Logs and database files
+*.log
+*.sqlite3
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Compiled objects and Fortran build artifacts
+*.o
+*.mod
+a.out
+
+# MESA and project caches / working dirs
+pyMesaStarCache/
+MesaWorkDir/
+LOGS/
+eosDT_cache/
+kap_cache/
+rates_cache/
+
+# General temporary files
+*.tmp
+*.swp
