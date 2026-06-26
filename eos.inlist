@@ -1,0 +1,25 @@
+&eos
+  ! Use all the standard EOS sources (FreeEOS, OPAL, HELM)
+  !use_FreeEOS       = .true.
+  !use_OPAL_SCVH     = .true.
+  !use_Skye          = .true.
+  !use_PC            = .false.
+
+  ! Tweak FreeEOS limits to ensure wide coverage
+  !logT_min_FreeEOS_lo = 3.0
+  !logT_min_FreeEOS_hi = 3.1
+  !logT_max_FreeEOS_lo = 8.1
+  !logT_max_FreeEOS_hi = 8.2
+
+  !logRho_min_FreeEOS_lo = -18.1
+  !logRho_min_FreeEOS_hi = -18.0
+  !logRho_max_FreeEOS_lo = 10.0
+  !logRho_max_FreeEOS_hi = 10.1
+
+  ! Allow HELM to take over gracefully if FreeEOS fails
+  !logT_all_HELM = 7.6
+  !logT_low_all_HELM = 2.3
+
+  ! Prevent crashes on EOS failure
+  !okay_to_convert_ierr_to_skip = .true.
+/

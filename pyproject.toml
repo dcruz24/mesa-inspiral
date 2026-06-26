@@ -1,0 +1,35 @@
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["*Tests", "Test*"]
+python_functions = ["test_*"]
+addopts = "-ra"
+
+[tool.pylint.main]
+py-version = "3.11"
+recursive = true
+ignore = [
+    ".git",
+    "__pycache__",
+    "MesaWorkDir",
+    "pyMesaStarCache",
+    "tests/legacy_notebooks",
+    "tests/fit_checks/plots",
+]
+
+[tool.pylint.messages_control]
+disable = [
+    "invalid-name",
+    "missing-module-docstring",
+    "missing-class-docstring",
+    "missing-function-docstring",
+    "too-many-arguments",
+    "too-many-locals",
+    "too-many-statements",
+    "too-many-instance-attributes",
+    "line-too-long",
+    "fixme",
+]
+
+[tool.pylint.format]
+max-line-length = 120

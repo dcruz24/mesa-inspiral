@@ -42,12 +42,13 @@ a.out
 
 # MESA and project caches / working dirs
 pyMesaStarCache/
-MesaWorkDir/
 LOGS/
 eosDT_cache/
 kap_cache/
 rates_cache/
-
+MesaTerminalOutPut
+MESA_OUTPUT.txt
+*.data
 # General temporary files
 *.tmp
 *.swp

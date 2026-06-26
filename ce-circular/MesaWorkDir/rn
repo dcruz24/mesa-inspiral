@@ -1,8 +1,0 @@
-#!/bin/bash
-
-rm -f restart_photo
-
-date "+DATE: %Y-%m-%d%nTIME: %H:%M:%S"
-./star
-#../15Msun/work/star
-date "+DATE: %Y-%m-%d%nTIME: %H:%M:%S"
